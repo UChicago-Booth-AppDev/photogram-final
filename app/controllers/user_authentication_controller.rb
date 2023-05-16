@@ -87,4 +87,22 @@ class UserAuthenticationController < ApplicationController
     redirect_to("/", { :notice => "User account cancelled" })
   end
  
+  def index
+    @users = User.all.order({ :username => :asc })
+
+    render({ :template => "user_authentication/index.html.erb" })
+  end
+
+  def show
+    the_username = params.fetch("the_username")
+    @user = User.where({ :username => the_username }).at(0)
+
+    render({ :template => "user_authentication/show.html.erb" })
+  end
+
+  def not_following
+    redirect_to("/", { :alert => "You're not authorized for that"})
+  end
+
+
 end

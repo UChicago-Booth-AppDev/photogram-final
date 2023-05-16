@@ -55,4 +55,17 @@ class FollowRequestsController < ApplicationController
 
     redirect_to("/follow_requests", { :notice => "Follow request deleted successfully."} )
   end
+
+  def unfollow
+    the_id = params.fetch("path_id")
+    the_following = FollowRequest.where({ :id => the_id }).at(0).recipient_id
+    the_follow_request = FollowRequest.where({ :id => the_id }).at(0)
+
+    the_follow_request.destroy
+
+    redirect_to("/users/#{the_following}")
+    
+  end
+
+
 end

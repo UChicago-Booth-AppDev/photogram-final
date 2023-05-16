@@ -17,7 +17,11 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
-  has_many :photos
+  has_many :followers, :foreign_key => "recipient_id", :class_name => "FollowRequest"
+
+  has_many :own_photos, :foreign_key => "owner_id", :class_name => "Photo"
+
+  has_many :followings, :foreign_key => "sender_id", :class_name => "FollowRequest"
  
 
 end

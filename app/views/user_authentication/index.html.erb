@@ -1,0 +1,82 @@
+<h1>List of users</h1>
+
+<% # Falta arrumar a coluna request aqui %>
+
+<table border="1">
+  <tr>
+    
+    <th>
+      Username
+    </th>
+
+    <th>
+      Private?
+    </th>
+    
+    <th></th>
+    
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+  <tr>
+  
+
+    <td>
+      <%= user.username %>
+    </td>
+
+    <td>
+      <% if user.private == true %>
+      Yes
+      <% else %>
+      No
+      <% end %>
+    </td>
+
+    <td>
+        
+          <% if @current_user.followings.where({:recipient_id => user.id}).at(0) != nil %>
+            
+            <% if @current_user.followings.where({:recipient_id => user.id}).at(0).status == "accepted" %>
+          
+                  <a href="/modify_follow_request/<%= @current_user.followings.where({:recipient_id => user.id}).at(0).id %>">Unfollow</a>
+            <%else%>
+                
+                  <% if @current_user.followings.where({:recipient_id => user.id}).at(0).status == "pending" %>
+                      Request sent. Cancel
+                  <%else%>  
+                      Follow
+                  <%end%> 
+
+            <%end%>
+
+            
+          
+              
+            
+          <%else%>  
+            Follow
+          <%end%>
+        
+        </td>
+
+        <td>
+          
+          <% if user.private == true %>
+              <%if @current_user.followings.where({:recipient_id => user.id}).at(0) != "accepted" %>
+                  <a href="/users/<%= user.username %>">Show details</a>
+              <%else%>
+                  <a href="/not_following">Show details</a>
+              <%end%>
+          <%else%>
+
+              <a href="/not_following">Show details</a>
+        
+          <% end %>
+       
+    </td>
+  </tr>
+  
+  <% end %>
+</table>
