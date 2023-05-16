@@ -15,10 +15,7 @@ class Photo < ApplicationRecord
 
 
 belongs_to :poster, :foreign_key => "owner_id", :class_name => "User" 
-#has_many :comments
-#has_many :authors, :through => :comments, :source => :user
-#has_many :likes
-#has_many :fans, :through => :likes, :source => :user
+
 
 
 

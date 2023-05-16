@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Photo #<%= @the_photo.id %> details
+      Photo Details
     </h1>
 
     <div>
@@ -37,7 +37,7 @@
         Image
       </dt>
       <dd>
-        <%= @the_photo.image %>
+         <img src="<%= @the_photo.image %>">
       </dd>
 
       <dt>
@@ -52,13 +52,6 @@
       </dt>
       <dd>
         <%= @the_photo.owner_id %>
-      </dd>
-
-      <dt>
-        Fk
-      </dt>
-      <dd>
-        <%= @the_photo.FK %>
       </dd>
 
       <dt>
@@ -126,14 +119,6 @@
         </label>
 
         <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_photo.owner_id %>">
-      </div>
-
-      <div>
-        <label for="FK_box">
-          Fk
-        </label>
-
-        <input type="text" id="FK_box" name="query_FK" value="<%= @the_photo.FK %>">
       </div>
 
       <button>
