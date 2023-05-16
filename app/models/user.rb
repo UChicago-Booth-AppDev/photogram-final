@@ -19,10 +19,10 @@ class User < ApplicationRecord
 
   has_many :photos
  
-  has_many :comments
-  has_many :commented_photos, :through => :photos, :source => :comment
-  has_many :likes
-  has_many :liked_photos, :through => :photos, :source => :like
-  has_many :follow_requests
+  #has_many :comments
+  #has_many :commented_photos, :through => :photos, :source => :comment
+  #has_many :likes
+ # has_many :liked_photos, :through => :photos, :source => :like
+  #has_many :follow_requests
 
 end
