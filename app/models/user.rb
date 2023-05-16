@@ -16,4 +16,13 @@ class User < ApplicationRecord
   validates :email, :uniqueness => { :case_sensitive => false }
   validates :email, :presence => true
   has_secure_password
+
+  has_many :photos
+ 
+  has_many :comments
+  has_many :commented_photos, :through => :photos, :source => :comment
+  has_many :likes
+  has_many :liked_photos, :through => :photos, :source => :like
+  has_many :follow_requests
+
 end
