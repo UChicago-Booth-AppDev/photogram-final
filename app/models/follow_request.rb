@@ -10,4 +10,6 @@
 #  sender_id    :integer
 #
 class FollowRequest < ApplicationRecord
+ 
+
 end
