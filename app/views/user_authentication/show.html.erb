@@ -7,29 +7,61 @@
 
   <dt>Followers</dt>
   <dd><%= @user.followers.where({:status => "accepted"}).count %></dd>
+  <dd>  
+      <%if @current_user.followings.where({:recipient_id => @user.id}).at(0) != nil%>
+          <% if @current_user.followings.where({:recipient_id => @user.id}).at(0).status == "accepted" %>
+          
+            <a href="/delete_follow_request/<%= @current_user.followings.where({:recipient_id => @user.id}).at(0).id %>" >Unfollow</a>
 
-  <dt>Pending follow requests</dt>
-  <dd><%= @user.followers.where({:status => "pending"}).count %></dd>
+          <%end%>
+      <%end%>
+  </dd>
 
+  <%if @user.username == @current_user.username%>
+      <dt>Pending follow requests</dt>
+      <dd><%= @user.followers.where({:status => "pending"}).count %></dd>
+  <%end%>
+  
   <dt>Following</dt>
   <dd><%= @user.followings.where({:status => "accepted"}).count %></dd>
 
+  <%if @user.username == @current_user.username%>
+      <dt>Edit user</dt>
+      <dd>
+        <form action="/modify_user" method="post">
+          <label for="browser_username">Username</label>
+          <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
 
-  <dt>Edit user</dt>
-  <dd>
-    <form action="/modify_user/<%= @user.id %>" >
-      <label for="browser_username">Username</label>
-      <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
-
-      <label for="browser_private">Private?</label>
-      <input id="browser_private" type="text" name="input_private" placeholder="Enter a private..." value="<%= @user.private %>">
+          <label for="browser_private">Private?</label>
+          <input id="browser_private" type="checkbox" name="input_private" placeholder="Enter a private...">
 
 
 
-      <button>Update user</button>
-    </form>
-  </dd>
+          <button>Update user</button>
+        </form>
+      </dd>
+  <%end%>
 </dl>
+
+  <nav>
+    <ul>
+        <li>
+            <a href="/users/<%= @user.username %>">Profile</a>
+        </li>
+
+        <li>
+            <a href="/users/<%= @user.username %>">Liked photos</a>
+        </li>
+
+        <li>
+            <a href="/users/<%= @user.username %>">Feed</a>
+        </li>
+
+        <li>
+            <a href="/users/<%= @user.username %>">Discover</a>
+        </li>
+    </ul>
+  </nav>
 
 <h2>Own photos (<%= @user.own_photos.count %>)</h2>
 

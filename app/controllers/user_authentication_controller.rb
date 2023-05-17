@@ -104,5 +104,21 @@ class UserAuthenticationController < ApplicationController
     redirect_to("/", { :alert => "You're not authorized for that"})
   end
 
+  def update_private
+    @user = @current_user
+    @user.private = params.fetch("input_private", false)
+    @user.username = params.fetch("input_username")
+    
+    if @user.valid?
+      @user.save
+
+      redirect_to("/", { :notice => "User account updated successfully."})
+    else
+      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+    end
+  end
+
+
+
 
 end
