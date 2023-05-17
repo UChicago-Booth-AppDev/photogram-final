@@ -81,6 +81,10 @@ Rails.application.routes.draw do
 
  get("/not_following", { :controller => "user_authentication", :action => "not_following" })
 
+ get("/users/:the_username/liked_photos", { :controller => "user_authentication", :action => "liked_photos_show" })
+
+ get("/users/:the_username/feed", { :controller => "user_authentication", :action => "feed_show" })
+
   # ------------------------------
 
   # SIGN IN FORM
