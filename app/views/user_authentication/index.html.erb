@@ -40,13 +40,22 @@
             
             <% if @current_user.followings.where({:recipient_id => user.id}).at(0).status == "accepted" %>
           
-                  <a href="/modify_follow_request/<%= @current_user.followings.where({:recipient_id => user.id}).at(0).id %>">Unfollow</a>
+                  <a href="/delete_follow_request/<%= @current_user.followings.where({:recipient_id => user.id}).at(0).id %>" >Unfollow</a>
             <%else%>
                 
                   <% if @current_user.followings.where({:recipient_id => user.id}).at(0).status == "pending" %>
-                      Request sent. Cancel
+                      Request sent. <a href="/delete_follow_request/<%= @current_user.followings.where({:recipient_id => user.id}).at(0).id %>" >Cancel</a>
                   <%else%>  
-                      Follow
+                      <form action="/insert_follow_request" method="post">
+                        
+                          <input id="browser_sender_id" type="hidden" name="input_sender" value="<%= @current_user.id %>">
+
+                          <input id="browser_recipient_id"  type="hidden" name="input_recipient" value="<%= user.id %>">
+
+                
+                          <button>Follow</button>
+                       </form>
+                    
                   <%end%> 
 
             <%end%>
@@ -56,7 +65,15 @@
               
             
           <%else%>  
-            Follow
+            <form action="/insert_follow_request" method="post">
+                        
+                          <input id="browser_sender_id" type="hidden" name="input_sender" value="<%= @current_user.id %>">
+
+                          <input id="browser_recipient_id"  type="hidden" name="input_recipient" value="<%= user.id %>">
+
+                
+                          <button>Follow</button>
+              </form>
           <%end%>
         
         </td>
