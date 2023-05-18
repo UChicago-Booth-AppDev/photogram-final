@@ -98,19 +98,19 @@
 
                 <td>
                   <% if @current_user != nil%>
-                      <% if FollowRequest.where({:sender_id => @current_user.id, :recipient_id => a_photo.owner_id}).first&.status == "accepted" || User.where({:id => a_photo.owner_id}).first&.private == false #@current_user.followings.where({:recipient_id => Photo.where({:owner_id => a_photo.owner_id})}).first&.status == "accepted" %>
+                      <% if FollowRequest.where({:sender_id => @current_user.id, :recipient_id => a_photo.owner_id}).first&.status == "accepted" || User.where({:id => a_photo.owner_id}).first&.private == false  %>
                           <a href="/photos/<%= a_photo.id %>">
                             Show details
                           </a>
                       <%else%>
                           <a href="/user_not_following">
-                        Show details
-                      </a>
+                              Show details
+                          </a>
                       <%end%>
                   
                   <%else%>
                       <a href="/user_sign_in_error_photo">
-                        Show details
+                          Show details
                       </a>
                     
                   <%end%>
