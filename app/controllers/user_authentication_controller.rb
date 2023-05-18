@@ -14,7 +14,7 @@ class UserAuthenticationController < ApplicationController
 
   def sign_in_form_error_photo
     
-    redirect_to("/photos", { :alert => "You have to sign in first."}) 
+    redirect_to("/user_sign_in", { :alert => "You have to sign in first."}) 
   end
 
   def not_folloing_error
@@ -108,6 +108,7 @@ class UserAuthenticationController < ApplicationController
     @users = User.all.order({ :username => :asc })
 
     render({ :template => "user_authentication/index.html.erb" })
+    
   end
 
   def show

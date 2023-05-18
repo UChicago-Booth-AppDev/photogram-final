@@ -63,63 +63,67 @@
         Add a fan
       </dt>
       <dd>
-      <% if @current_user.likes.where({:photo_id => @the_photo.id}).at(0) == nil %>
-              <form action="/insert_like" method="post">
-                        
-                          <input id="browser_fan_id" type="hidden" name="input_fan_id" value="<%= @current_user.id %>">
+      
+      <% if @current_user != nil%>
+          <% if @current_user.likes.where({:photo_id => @the_photo.id}).at(0) == nil %>
+                  <form action="/insert_like" method="post">
+                            
+                              <input id="browser_fan_id" type="hidden" name="input_fan_id" value="<%= @current_user.id %>">
 
-                          <input id="browser_photo_id"  type="hidden" name="input_photo_id" value="<%= @the_photo.id %>">
+                              <input id="browser_photo_id"  type="hidden" name="input_photo_id" value="<%= @the_photo.id %>">
 
-                
-                          <button>Like</button>
-              </form>
-        <%else%>
+                    
+                              <button>Like</button>
+                  </form>
+            <%else%>
 
-          <a href="/delete_like/<%= @current_user.likes.where({:photo_id => @the_photo.id}).at(0).id %>">Unlike</a>
-        
-        <%end%>
+              <a href="/delete_like/<%= @current_user.likes.where({:photo_id => @the_photo.id}).at(0).id %>">Unlike</a>
+            
+            <%end%>
+      <% end %>  
       </dd>
 
-      <% if @the_photo.owner_id == @current_user.id%>
-          <dt>
-            Edit photo
-          </dt>
-          <dd>
-                  <form action="/modify_photo/<%= @the_photo.id %>" method="post" class="form-horizontal" enctype="multipart/form-data">
-                
-                
+      <% if @current_user != nil%>
+          <% if @the_photo.owner_id == @current_user.id%>
+              <dt>
+                Edit photo
+              </dt>
+              <dd>
+                      <form action="/modify_photo/<%= @the_photo.id %>" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    
+                    
+                      
+                      <label for="browser_input_image">
+                        Image URL
+                      </label>
+
+                      <input type="file" id="browser_input_image" name="query_image" placeholder="Enter URL for the image..." class="form-control">
                   
-                  <label for="browser_input_image">
-                    Image URL
-                  </label>
+                    
+                    
+                      <label for="caption_box">
+                        Caption
+                      </label>
 
-                  <input type="file" id="browser_input_image" name="query_image" placeholder="Enter URL for the image..." class="form-control">
-              
-                
-                
-                  <label for="caption_box">
-                    Caption
-                  </label>
+                      <textarea id="caption_box" name="query_caption" rows="2" placeholder="Enter a caption for the photo"></textarea>
+                    
 
-                  <textarea id="caption_box" name="query_caption" rows="2" placeholder="Enter a caption for the photo"></textarea>
-                
+                    <button>
+                      Update photo
+                    </button>
+                  </form>
+              </dd>
 
-                <button>
-                  Update photo
-                </button>
-              </form>
-          </dd>
-
-          <dt>
-            Delete photo
-          </dt>
-          <dd>
-            <a href="/delete_photo/<%= @the_photo.id %>">
-                    Delete this photo
-                  </a>
-          </dd>
-      <%end%>
-
+              <dt>
+                Delete photo
+              </dt>
+              <dd>
+                <a href="/delete_photo/<%= @the_photo.id %>">
+                        Delete this photo
+                      </a>
+              </dd>
+          <%end%>
+        <% end %>
     </dl>
   </div>
 </div>
