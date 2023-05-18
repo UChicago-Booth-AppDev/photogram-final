@@ -34,7 +34,7 @@
 
 
 
-<h2>Feed (<%= @user.followings.where({:status => "accepted"}).count %>)</h2>
+<h2>Feed</h2>
 
 <table border="1">
   <tr>
@@ -61,35 +61,37 @@
     <th></th>
   </tr>
 
-  <% @user.liked_photos.each do |photo| %>
+  <% @user.followings.where({:status => "accepted"}).each do |friend| %>
   
-  <tr>
-    <td>
-      <img src="<%= photo.image %>">
-    </td>
+      <% Photo.where({:owner_id => friend.recipient_id}).each do |photo|%>
 
-    <td>
-      <%= photo.poster.username %>
-    </td>
+          <tr>
+            <td>
+              <img src="<%= photo.image %>">
+            </td>
 
-    <td>
-      <%= photo.caption %>
-    </td>
+            <td>
+              <%= photo.poster.username %>
+            </td>
 
-    <td>
-      <%= time_ago_in_words(photo.created_at) %> ago
-    </td>
-    
-    <td>
-      <%= photo.likes.count %>
-    </td>
+            <td>
+              <%= photo.caption %>
+            </td>
 
-    <td>
-      <a href="/photos/<%= photo.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
+            <td>
+              <%= time_ago_in_words(photo.created_at) %> ago
+            </td>
+            
+            <td>
+              <%= photo.likes.count %>
+            </td>
 
+            <td>
+              <a href="/photos/<%= photo.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+      <% end %>
   <% end %>
 </table>
