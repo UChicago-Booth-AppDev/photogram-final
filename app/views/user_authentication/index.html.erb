@@ -87,7 +87,7 @@
           <td>
             
                 <% if user.private == true %>
-                    <%if @current_user.followings.where({:recipient_id => user.id}).at(0) == "accepted" || @current_user.username == user.username %>
+                    <%if FollowRequest.where({:recipient_id => user.id,:sender_id => @current_user.id}).first&.status == "accepted" || @current_user.username == user.username %>
                         <a href="/users/<%= user.username %>">Show details</a>
                     <%else%>
                         <a href="/not_following">Show details</a>
