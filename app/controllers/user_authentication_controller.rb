@@ -106,8 +106,13 @@ class UserAuthenticationController < ApplicationController
 
   def update_private
     @user = @current_user
-    @user.private = params.fetch("input_private", false)
-    @user.username = params.fetch("input_username")
+    @user.private = params.fetch("query_private", false)
+    @user.username = params.fetch("query_username")
+    @user.email = params.fetch("query_email")
+    @user.comments_count = params.fetch("query_comments_count")
+    @user.likes_count = params.fetch("query_likes_count")
+    @user.password = params.fetch("query_password")
+    @user.password_confirmation = params.fetch("query_password_confirmation")
     
     if @user.valid?
       @user.save

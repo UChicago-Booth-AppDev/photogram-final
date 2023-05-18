@@ -13,15 +13,15 @@
 <div>
   <div>
 
-    <form action="/insert_photo" method="post">
+    <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
       
        
          
-        <label for="image_box">
+        <label for="browser_input_image">
           Image
         </label>
 
-        <input type="text" id="image_box" name="query_image">
+        <input type="file" id="browser_input_image" name="query_image" placeholder="Enter URL for the image..." class="form-control">
      
        
        
@@ -29,7 +29,7 @@
           Caption
         </label>
 
-        <textarea id="caption_box" name="query_caption" rows="3"></textarea>
+        <textarea id="caption_box" name="query_caption" rows="2" placeholder="Enter a caption for the photo"></textarea>
       
 
       <button>
@@ -65,6 +65,10 @@
 
         <th>
           Likes
+        </th>
+
+        <th>
+          
         </th>
 
       </tr>

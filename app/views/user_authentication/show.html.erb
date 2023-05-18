@@ -6,41 +6,62 @@
   <dd><%= @user.private %></dd>
 
   <dt>Followers</dt>
-  <dd><%= @user.followers.where({:status => "accepted"}).count %></dd>
-  <dd>  
-      <%if @current_user.followings.where({:recipient_id => @user.id}).at(0) != nil%>
-          <% if @current_user.followings.where({:recipient_id => @user.id}).at(0).status == "accepted" %>
-          
-            <a href="/delete_follow_request/<%= @current_user.followings.where({:recipient_id => @user.id}).at(0).id %>" >Unfollow</a>
-
-          <%end%>
-      <%end%>
+  <dd>
+      <%= @user.followers.where({:status => "accepted"}).count %>  
   </dd>
 
-  <%if @user.username == @current_user.username%>
-      <dt>Pending follow requests</dt>
-      <dd><%= @user.followers.where({:status => "pending"}).count %></dd>
-  <%end%>
   
-  <dt>Following</dt>
-  <dd><%= @user.followings.where({:status => "accepted"}).count %></dd>
+  <% if @current_user != nil %>
+      <dd>  
+          <%if @current_user.followings.where({:recipient_id => @user.id}).at(0) != nil%>
+              <% if @current_user.followings.where({:recipient_id => @user.id}).at(0).status == "accepted" %>
+              
+                <a href="/delete_follow_request/<%= @current_user.followings.where({:recipient_id => @user.id}).at(0).id %>" >Unfollow</a>
 
-  <%if @user.username == @current_user.username%>
-      <dt>Edit user</dt>
-      <dd>
-        <form action="/modify_user" method="post">
-          <label for="browser_username">Username</label>
-          <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
+              <%end%>
 
-          <label for="browser_private">Private?</label>
-          <input id="browser_private" type="checkbox" name="input_private" placeholder="Enter a private...">
+          <%else%>    
+              <form action="/insert_follow_request" method="post">
+                            
+                              <input id="browser_sender" type="hidden" name="input_sender" value="<%= @current_user.id %>">
 
+                              <input id="browser_recipient_id"  type="hidden" name="input_recipient" value="<%= @user.id %>">
 
-
-          <button>Update user</button>
-        </form>
+                    
+                              <button>Follow</button>
+                  </form>
+          
+          <%end%>
       </dd>
   <%end%>
+  
+  <% if @current_user != nil %>
+      <%if @user.username == @current_user.username%>
+          <dt>Pending follow requests</dt>
+          <dd><%= @user.followers.where({:status => "pending"}).count %></dd>
+      <%end%>
+  <%end%>
+
+  <dt>Following</dt>
+  <dd><%= @user.followings.where({:status => "accepted"}).count %></dd>
+ <% if @current_user != nil %>
+      <%if @user.username == @current_user.username%>
+          <dt>Edit user</dt>
+          <dd>
+            <form action="/modify_user" method="post">
+              <label for="browser_username">Username</label>
+              <input id="browser_username" type="text" name="input_username" placeholder="Enter a username..." value="<%= @user.username %>">
+
+              <label for="browser_private">Private?</label>
+              <input id="browser_private" type="checkbox" name="input_private" placeholder="Enter a private...">
+
+
+
+              <button>Update user</button>
+            </form>
+          </dd>
+      <%end%>
+  <%end%>    
 </dl>
 
   <nav>
@@ -93,7 +114,7 @@
   <% @user.own_photos.each do |photo| %>
   <tr>
     <td>
-      <img src="<%= photo.image %>">
+      <img src="<%= photo.image %>" class="img-responsive">
     </td>
 
     <td>
