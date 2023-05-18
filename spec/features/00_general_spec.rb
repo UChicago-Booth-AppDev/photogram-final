@@ -153,7 +153,7 @@ describe "The home page" do
     find("a", :text => /Sign out/i).click
 
     expect(page).to have_text(/Signed out successfully/i),
-      "Expected to find 'Signed out succesfully' after clicking 'Sign out' but didn't find it."
+      "Expected to find 'Signed out successfully' after clicking 'Sign out' but didn't find it."
     end
   end
 
