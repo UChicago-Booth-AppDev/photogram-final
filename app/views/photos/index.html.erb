@@ -96,9 +96,15 @@
         </td>
 
         <td>
-          <a href="/photos/<%= a_photo.id %>">
-            Show details
-          </a>
+          <% if @current_user != nil%>
+              <a href="/photos/<%= a_photo.id %>">
+                Show details
+              </a>
+          <%else%>
+              <a href="/user_sign_in" alert="You have to sign in first">
+                Show details
+              </a>
+          <%end%>
         </td>
       </tr>
       <% end %>
