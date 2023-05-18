@@ -9,7 +9,17 @@ class UserAuthenticationController < ApplicationController
 
   def sign_in_form_error
     
-    redirect_to("/", { :alert => "You must sign in first."}) 
+    redirect_to("/", { :alert => "You have to sign in first."}) 
+  end
+
+  def sign_in_form_error_photo
+    
+    redirect_to("/photos", { :alert => "You have to sign in first."}) 
+  end
+
+  def not_folloing_error
+    
+    redirect_to("/photos", { :alert => "You are not following this user."}) 
   end
 
 

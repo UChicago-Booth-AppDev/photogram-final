@@ -92,6 +92,10 @@ Rails.application.routes.draw do
 
   get("/user_sign_in_error", { :controller => "user_authentication", :action => "sign_in_form_error" })
 
+  get("/user_sign_in_error_photo", { :controller => "user_authentication", :action => "sign_in_form_error_photo" })
+
+  get("/user_not_following", { :controller => "user_authentication", :action => "not_folloing_error" })
+
   # AUTHENTICATE AND STORE COOKIE
   post("/user_verify_credentials", { :controller => "user_authentication", :action => "create_cookie" })
   

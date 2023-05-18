@@ -85,7 +85,29 @@
             Edit photo
           </dt>
           <dd>
-            Edit this photo
+                  <form action="/modify_photo/<%= @the_photo.id %>" method="post" class="form-horizontal" enctype="multipart/form-data">
+                
+                
+                  
+                  <label for="browser_input_image">
+                    Image URL
+                  </label>
+
+                  <input type="file" id="browser_input_image" name="query_image" placeholder="Enter URL for the image..." class="form-control">
+              
+                
+                
+                  <label for="caption_box">
+                    Caption
+                  </label>
+
+                  <textarea id="caption_box" name="query_caption" rows="2" placeholder="Enter a caption for the photo"></textarea>
+                
+
+                <button>
+                  Update photo
+                </button>
+              </form>
           </dd>
 
           <dt>

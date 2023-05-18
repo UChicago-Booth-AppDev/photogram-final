@@ -103,11 +103,9 @@
       <%else%>
           <td>
 
-              <% if user.private == true %>
-                <a href="/not_following">Show details</a>
-              <%else%>
-                <a href="/users/<%= user.username %>">Show details</a>
-              <%end%>
+              
+                <a href="/user_sign_in_error">Show details</a>
+             
           </td>
       <%end%>
 
